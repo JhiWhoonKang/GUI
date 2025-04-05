@@ -1,0 +1,10 @@
+C:\Users\user\Desktop\LIG_SW\githubRepo\LIGNex1\LIGNex1_RTOS\RTOSMiniProject\bin\Debug\RTOSMiniProject.exe.config
+C:\Users\user\Desktop\LIG_SW\githubRepo\LIGNex1\LIGNex1_RTOS\RTOSMiniProject\bin\Debug\RTOSMiniProject.exe
+C:\Users\user\Desktop\LIG_SW\githubRepo\LIGNex1\LIGNex1_RTOS\RTOSMiniProject\bin\Debug\RTOSMiniProject.pdb
+C:\Users\user\Desktop\LIG_SW\githubRepo\LIGNex1\LIGNex1_RTOS\RTOSMiniProject\obj\Debug\RTOSMiniProject.csproj.AssemblyReference.cache
+C:\Users\user\Desktop\LIG_SW\githubRepo\LIGNex1\LIGNex1_RTOS\RTOSMiniProject\obj\Debug\RTOSMiniProject.MainGUI.resources
+C:\Users\user\Desktop\LIG_SW\githubRepo\LIGNex1\LIGNex1_RTOS\RTOSMiniProject\obj\Debug\RTOSMiniProject.Properties.Resources.resources
+C:\Users\user\Desktop\LIG_SW\githubRepo\LIGNex1\LIGNex1_RTOS\RTOSMiniProject\obj\Debug\RTOSMiniProject.csproj.GenerateResource.cache
+C:\Users\user\Desktop\LIG_SW\githubRepo\LIGNex1\LIGNex1_RTOS\RTOSMiniProject\obj\Debug\RTOSMiniProject.csproj.CoreCompileInputs.cache
+C:\Users\user\Desktop\LIG_SW\githubRepo\LIGNex1\LIGNex1_RTOS\RTOSMiniProject\obj\Debug\RTOSMiniProject.exe
+C:\Users\user\Desktop\LIG_SW\githubRepo\LIGNex1\LIGNex1_RTOS\RTOSMiniProject\obj\Debug\RTOSMiniProject.pdb

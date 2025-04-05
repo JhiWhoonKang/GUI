@@ -1,0 +1,89 @@
+{
+  "Version": 1,
+  "WorkspaceRootPath": "C:\\Users\\user\\Desktop\\LIG_SW\\githubRepo\\LIGNex1\\LIGNex1_RTOS\\RTOSMiniProject\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{09D8551F-2284-4D77-A034-FD86122E74FB}|RTOSMiniProject.csproj|c:\\users\\user\\desktop\\lig_sw\\githubrepo\\lignex1\\lignex1_rtos\\rtosminiproject\\maingui.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{09D8551F-2284-4D77-A034-FD86122E74FB}|RTOSMiniProject.csproj|solutionrelative:maingui.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{09D8551F-2284-4D77-A034-FD86122E74FB}|RTOSMiniProject.csproj|C:\\Users\\user\\Desktop\\LIG_SW\\githubRepo\\LIGNex1\\LIGNex1_RTOS\\RTOSMiniProject\\maingui.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
+      "RelativeMoniker": "D:0:0:{09D8551F-2284-4D77-A034-FD86122E74FB}|RTOSMiniProject.csproj|solutionrelative:maingui.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{09D8551F-2284-4D77-A034-FD86122E74FB}|RTOSMiniProject.csproj|C:\\Users\\user\\Desktop\\LIG_SW\\githubRepo\\LIGNex1\\LIGNex1_RTOS\\RTOSMiniProject\\maingui.designer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{09D8551F-2284-4D77-A034-FD86122E74FB}|RTOSMiniProject.csproj|solutionrelative:maingui.designer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{00000000-0000-0000-0000-000000000000}|\u003CSolution\u003E|RTOSMiniProject||{04B8AB82-A572-4FEF-95CE-5222444B6B64}|"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{09D8551F-2284-4D77-A034-FD86122E74FB}|RTOSMiniProject.csproj|c:\\users\\user\\desktop\\lig_sw\\githubrepo\\lignex1\\lignex1_rtos\\rtosminiproject\\properties\\resources.resx||{FF4D6ACA-9352-4A5F-821E-F4D6EBDCAB11}",
+      "RelativeMoniker": "D:0:0:{09D8551F-2284-4D77-A034-FD86122E74FB}|RTOSMiniProject.csproj|solutionrelative:properties\\resources.resx||{FF4D6ACA-9352-4A5F-821E-F4D6EBDCAB11}"
+    }
+  ],
+  "DocumentGroupContainers": [
+    {
+      "Orientation": 0,
+      "VerticalTabListWidth": 256,
+      "DocumentGroups": [
+        {
+          "DockedWidth": 200,
+          "SelectedChildIndex": 2,
+          "Children": [
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "RTOSMiniProject",
+              "DocumentMoniker": "C:\\Users\\user\\Desktop\\LIG_SW\\githubRepo\\LIGNex1\\LIGNex1_RTOS\\RTOSMiniProject\\RTOSMiniProject.csproj",
+              "RelativeDocumentMoniker": "RTOSMiniProject.csproj",
+              "ToolTip": "C:\\Users\\user\\Desktop\\LIG_SW\\githubRepo\\LIGNex1\\LIGNex1_RTOS\\RTOSMiniProject\\RTOSMiniProject.csproj",
+              "RelativeToolTip": "RTOSMiniProject.csproj",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001001|",
+              "WhenOpened": "2025-03-15T16:10:24.542Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "MainGUI.Designer.cs",
+              "DocumentMoniker": "C:\\Users\\user\\Desktop\\LIG_SW\\githubRepo\\LIGNex1\\LIGNex1_RTOS\\RTOSMiniProject\\MainGUI.Designer.cs",
+              "RelativeDocumentMoniker": "MainGUI.Designer.cs",
+              "ToolTip": "C:\\Users\\user\\Desktop\\LIG_SW\\githubRepo\\LIGNex1\\LIGNex1_RTOS\\RTOSMiniProject\\MainGUI.Designer.cs",
+              "RelativeToolTip": "MainGUI.Designer.cs",
+              "ViewState": "AgIAAMUBAAAAAAAAAIAwwM8BAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-03-15T14:24:55.883Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "MainGUI.cs",
+              "DocumentMoniker": "C:\\Users\\user\\Desktop\\LIG_SW\\githubRepo\\LIGNex1\\LIGNex1_RTOS\\RTOSMiniProject\\MainGUI.cs",
+              "RelativeDocumentMoniker": "MainGUI.cs",
+              "ToolTip": "C:\\Users\\user\\Desktop\\LIG_SW\\githubRepo\\LIGNex1\\LIGNex1_RTOS\\RTOSMiniProject\\MainGUI.cs",
+              "RelativeToolTip": "MainGUI.cs",
+              "ViewState": "AgIAAPoAAAAAAAAAAAAAAP4AAAA+AAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-03-14T05:59:37.656Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "MainGUI.cs [\uB514\uC790\uC778]",
+              "DocumentMoniker": "C:\\Users\\user\\Desktop\\LIG_SW\\githubRepo\\LIGNex1\\LIGNex1_RTOS\\RTOSMiniProject\\MainGUI.cs",
+              "RelativeDocumentMoniker": "MainGUI.cs",
+              "ToolTip": "C:\\Users\\user\\Desktop\\LIG_SW\\githubRepo\\LIGNex1\\LIGNex1_RTOS\\RTOSMiniProject\\MainGUI.cs [\uB514\uC790\uC778]",
+              "RelativeToolTip": "MainGUI.cs [\uB514\uC790\uC778]",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-03-14T00:01:34.649Z",
+              "EditorCaption": " [\uB514\uC790\uC778]"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
