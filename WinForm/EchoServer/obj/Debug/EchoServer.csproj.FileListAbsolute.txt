@@ -1,0 +1,10 @@
+D:\_JHIWHOON_ws\github_ws\Network\EchoServer\bin\Debug\EchoServer.exe.config
+D:\_JHIWHOON_ws\github_ws\Network\EchoServer\bin\Debug\EchoServer.exe
+D:\_JHIWHOON_ws\github_ws\Network\EchoServer\bin\Debug\EchoServer.pdb
+D:\_JHIWHOON_ws\github_ws\Network\EchoServer\obj\Debug\EchoServer.csproj.AssemblyReference.cache
+D:\_JHIWHOON_ws\github_ws\Network\EchoServer\obj\Debug\EchoServer.Form1.resources
+D:\_JHIWHOON_ws\github_ws\Network\EchoServer\obj\Debug\EchoServer.Properties.Resources.resources
+D:\_JHIWHOON_ws\github_ws\Network\EchoServer\obj\Debug\EchoServer.csproj.GenerateResource.cache
+D:\_JHIWHOON_ws\github_ws\Network\EchoServer\obj\Debug\EchoServer.csproj.CoreCompileInputs.cache
+D:\_JHIWHOON_ws\github_ws\Network\EchoServer\obj\Debug\EchoServer.exe
+D:\_JHIWHOON_ws\github_ws\Network\EchoServer\obj\Debug\EchoServer.pdb
