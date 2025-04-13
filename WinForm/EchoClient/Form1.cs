@@ -84,8 +84,9 @@ namespace EchoClient
 
                 BTN_CONNECT.Enabled = false;
                 BTN_DISCONNECT.Enabled = true;
-                
-                AddLog(DateTime.Now.ToString("HH:mm:ss"), "연결 성공");
+                BTN_SEND.Enabled = true;
+
+                AddLog(DateTime.Now.ToString("HH:mm:ss"), "나이스");
             }
             catch (Exception ex)
             {
@@ -101,7 +102,7 @@ namespace EchoClient
             BTN_DISCONNECT.Enabled = false;
             BTN_SEND.Enabled = false;
 
-            AddLog(DateTime.Now.ToString("HH:mm:ss"), "연결 종료");
+            AddLog(DateTime.Now.ToString("HH:mm:ss"), "ㅂㅂ");
         }
 
         private void BTN_EXIT_Click(object sender, EventArgs e)

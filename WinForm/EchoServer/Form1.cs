@@ -43,7 +43,7 @@ namespace EchoServer
                         Invoke(new Action(() =>
                         {
                             string remoteEP = client.Client.RemoteEndPoint.ToString();
-                            AddListViewItem(DateTime.Now.ToString("HH:mm:ss"), $"클라이언트 연결됨: {remoteEP}");
+                            AddListViewItem(DateTime.Now.ToString("HH:mm:ss"), $"연결 됐수다: {remoteEP}");
                         }));
 
                         Thread clientThread = new Thread(() => ControlClient(client));
@@ -61,7 +61,7 @@ namespace EchoServer
             {
                 Invoke(new Action(() =>
                 {
-                    AddListViewItem("서버 종료", ex.Message);
+                    AddListViewItem("서버 ㅂㅂ", ex.Message);
                 }));
             }
         }
@@ -104,7 +104,7 @@ namespace EchoServer
 
                 Invoke(new Action(() =>
                 {
-                    AddListViewItem(DateTime.Now.ToString("HH:mm:ss"), "클라이언트 연결 종료됨");
+                    AddListViewItem(DateTime.Now.ToString("HH:mm:ss"), "클라이언트 ㅂㅂ");
                 }));
 
             }
@@ -112,7 +112,7 @@ namespace EchoServer
             {
                 Invoke(new Action(() =>
                 {
-                    AddListViewItem("클라이언트 에러", ex.Message);
+                    AddListViewItem("클라이언트 에러 ;;", ex.Message);
                 }));
             }
             finally
@@ -138,7 +138,7 @@ namespace EchoServer
                 listenerThread = new Thread(new ThreadStart(StartServer));
                 listenerThread.IsBackground = true;
                 listenerThread.Start();
-                AddListViewItem("서버 시작됨", $"포트 {Port}");
+                AddListViewItem("서버 ㄱㄱ", $"포트 {Port}");
             }
         }
 

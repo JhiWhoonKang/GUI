@@ -1,13 +1,13 @@
 {
   "Version": 1,
-  "WorkspaceRootPath": "D:\\_JHIWHOON_ws\\github_ws\\Network\\EchoClient\\",
+  "WorkspaceRootPath": "C:\\Users\\user\\Desktop\\LIG_SW\\githubRepo\\GUI\\WinForm\\EchoClient\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{4E423856-2DB4-4699-837F-16261522BD9D}|EchoClient.csproj|d:\\_jhiwhoon_ws\\github_ws\\network\\echoclient\\form1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{4E423856-2DB4-4699-837F-16261522BD9D}|EchoClient.csproj|c:\\users\\user\\desktop\\lig_sw\\githubrepo\\gui\\winform\\echoclient\\form1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{4E423856-2DB4-4699-837F-16261522BD9D}|EchoClient.csproj|solutionrelative:form1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{4E423856-2DB4-4699-837F-16261522BD9D}|EchoClient.csproj|d:\\_jhiwhoon_ws\\github_ws\\network\\echoclient\\form1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
+      "AbsoluteMoniker": "D:0:0:{4E423856-2DB4-4699-837F-16261522BD9D}|EchoClient.csproj|C:\\Users\\user\\Desktop\\LIG_SW\\githubRepo\\GUI\\WinForm\\EchoClient\\form1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
       "RelativeMoniker": "D:0:0:{4E423856-2DB4-4699-837F-16261522BD9D}|EchoClient.csproj|solutionrelative:form1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
     }
   ],
@@ -24,11 +24,11 @@
               "$type": "Document",
               "DocumentIndex": 0,
               "Title": "Form1.cs",
-              "DocumentMoniker": "D:\\_JHIWHOON_ws\\github_ws\\Network\\EchoClient\\Form1.cs",
+              "DocumentMoniker": "C:\\Users\\user\\Desktop\\LIG_SW\\githubRepo\\GUI\\WinForm\\EchoClient\\Form1.cs",
               "RelativeDocumentMoniker": "Form1.cs",
-              "ToolTip": "D:\\_JHIWHOON_ws\\github_ws\\Network\\EchoClient\\Form1.cs",
+              "ToolTip": "C:\\Users\\user\\Desktop\\LIG_SW\\githubRepo\\GUI\\WinForm\\EchoClient\\Form1.cs",
               "RelativeToolTip": "Form1.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAACkAAAAsAAAAAAAAAA==",
+              "ViewState": "AgIAAEQAAAAAAAAAAAAYwFcAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-04-12T15:07:35.305Z",
               "EditorCaption": ""
@@ -37,13 +37,12 @@
               "$type": "Document",
               "DocumentIndex": 1,
               "Title": "Form1.cs [\uB514\uC790\uC778]",
-              "DocumentMoniker": "D:\\_JHIWHOON_ws\\github_ws\\Network\\EchoClient\\Form1.cs",
+              "DocumentMoniker": "C:\\Users\\user\\Desktop\\LIG_SW\\githubRepo\\GUI\\WinForm\\EchoClient\\Form1.cs",
               "RelativeDocumentMoniker": "Form1.cs",
-              "ToolTip": "D:\\_JHIWHOON_ws\\github_ws\\Network\\EchoClient\\Form1.cs [\uB514\uC790\uC778]",
+              "ToolTip": "C:\\Users\\user\\Desktop\\LIG_SW\\githubRepo\\GUI\\WinForm\\EchoClient\\Form1.cs [\uB514\uC790\uC778]",
               "RelativeToolTip": "Form1.cs [\uB514\uC790\uC778]",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-04-12T15:07:29.544Z",
-              "EditorCaption": " [\uB514\uC790\uC778]"
+              "WhenOpened": "2025-04-12T15:07:29.544Z"
             }
           ]
         }
