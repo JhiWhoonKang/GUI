@@ -398,3 +398,16 @@ FodyWeavers.xsd
 
 # JetBrains Rider
 *.sln.iml
+
+
+# .vs 디렉토리 전체 무시
+.vs/
+
+# 사용자 설정 파일
+*.suo
+*.user
+*.userosscache
+*.sln.docstates
+
+# 백업 및 설정 관련 JSON 파일
+*.backup.json
