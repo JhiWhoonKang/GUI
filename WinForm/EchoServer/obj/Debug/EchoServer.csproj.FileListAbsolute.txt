@@ -18,3 +18,13 @@ C:\Users\user\Desktop\LIG_SW\githubRepo\GUI\WinForm\EchoServer\obj\Debug\EchoSer
 C:\Users\user\Desktop\LIG_SW\githubRepo\GUI\WinForm\EchoServer\obj\Debug\EchoServer.csproj.CoreCompileInputs.cache
 C:\Users\user\Desktop\LIG_SW\githubRepo\GUI\WinForm\EchoServer\obj\Debug\EchoServer.exe
 C:\Users\user\Desktop\LIG_SW\githubRepo\GUI\WinForm\EchoServer\obj\Debug\EchoServer.pdb
+C:\Users\user\SocketProgramming\GANGJIHUN\EchoServer\bin\Debug\EchoServer.exe.config
+C:\Users\user\SocketProgramming\GANGJIHUN\EchoServer\bin\Debug\EchoServer.exe
+C:\Users\user\SocketProgramming\GANGJIHUN\EchoServer\bin\Debug\EchoServer.pdb
+C:\Users\user\SocketProgramming\GANGJIHUN\EchoServer\obj\Debug\EchoServer.csproj.AssemblyReference.cache
+C:\Users\user\SocketProgramming\GANGJIHUN\EchoServer\obj\Debug\EchoServer.Form1.resources
+C:\Users\user\SocketProgramming\GANGJIHUN\EchoServer\obj\Debug\EchoServer.Properties.Resources.resources
+C:\Users\user\SocketProgramming\GANGJIHUN\EchoServer\obj\Debug\EchoServer.csproj.GenerateResource.cache
+C:\Users\user\SocketProgramming\GANGJIHUN\EchoServer\obj\Debug\EchoServer.csproj.CoreCompileInputs.cache
+C:\Users\user\SocketProgramming\GANGJIHUN\EchoServer\obj\Debug\EchoServer.exe
+C:\Users\user\SocketProgramming\GANGJIHUN\EchoServer\obj\Debug\EchoServer.pdb
