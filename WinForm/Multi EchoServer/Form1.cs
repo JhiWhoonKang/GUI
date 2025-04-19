@@ -5,17 +5,18 @@ using System.Text;
 using System.Threading;
 using System.Windows.Forms;
 using System.Drawing;
+using System.Collections.Generic;
 
 namespace EchoServer
 {
     public partial class Form1 : Form
     {
-        private TcpListener tcpListener;
-        private TcpClient connectedClient;
+        private TcpListener server;
+        Dictionary<string, TcpClient> manageClients = new Dictionary<string, TcpClient>();
         private bool isRunning = false;
         private Thread listenerThread;
         private const int Port = 9000;
-        
+        CancellationTokenSource cts = new CancellationTokenSource();
 
         public Form1()
         {
@@ -31,25 +32,26 @@ namespace EchoServer
             LV_SERVER.Columns.Add("데이터", 300, HorizontalAlignment.Left);
         }
 
-        private void StartServer()
+        private async void StartServer()
         {
             try
             {
-                tcpListener = new TcpListener(IPAddress.Any, Port);
-                tcpListener.Start();
+                server = new TcpListener(IPAddress.Any, Port);
+                server.Start();
 
-                while (isRunning)
+                while (isRunning || !cts.Token.IsCancellationRequested)
                 {
-                    TcpClient client = tcpListener.AcceptTcpClient();
-                    connectedClient = client;
+                    TcpClient client = await server.AcceptTcpClientAsync();
+                    string clientKey = ((IPEndPoint)client.Client.RemoteEndPoint).ToString();
+
+                    manageClients[clientKey] = client;
 
                     Invoke(new Action(() =>
                     {
-                        string remoteEP = client.Client.RemoteEndPoint.ToString();
-                        AddListViewItem(DateTime.Now.ToString("HH:mm:ss"), $"연결 됐수다: {remoteEP}");
+                        AddListViewItem(DateTime.Now.ToString("HH:mm:ss"), $"연결 됐수다: {clientKey}");
                     }));
 
-                    Thread clientThread = new Thread(() => ControlClient(client));
+                    Thread clientThread = new Thread(() => ReceiveLoop(client, clientKey));
                     clientThread.IsBackground = true;
                     clientThread.Start();
                 }
@@ -64,7 +66,7 @@ namespace EchoServer
             }
         }
 
-        private void ControlClient(TcpClient client)
+        private void ReceiveLoop(TcpClient client, string clientKey)
         {
             try
             {
@@ -140,7 +142,7 @@ namespace EchoServer
         private void BTN_STOP_Click(object sender, EventArgs e)
         {
             Btn_Status_Close();
-            tcpListener?.Stop();
+            server?.Stop();
         }
 
         private void BTN_EXIT_Click(object sender, EventArgs e)
@@ -163,20 +165,8 @@ namespace EchoServer
             isRunning = false;
         }
 
-        private void Socket_Close()
-        {
-            connectedClient?.GetStream().Close();
-            connectedClient?.Close();
-            connectedClient = null;
-        }
-
         private void Socket_Close(TcpClient client)
         {
-            if (connectedClient == client)
-            {
-                connectedClient = null;
-            }
-
             client?.GetStream().Close();
             client?.Close();
             client = null;
