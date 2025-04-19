@@ -9,7 +9,7 @@ using System.Collections.Generic;
 
 namespace EchoServer
 {
-    public partial class Form1 : Form
+    public partial class FormMainServer : Form
     {
         private TcpListener server;
         Dictionary<string, TcpClient> manageClients = new Dictionary<string, TcpClient>();
@@ -18,7 +18,7 @@ namespace EchoServer
         private const int Port = 9000;
         CancellationTokenSource cts = new CancellationTokenSource();
 
-        public Form1()
+        public FormMainServer()
         {
             InitializeComponent();
 
@@ -30,6 +30,10 @@ namespace EchoServer
             LV_SERVER.View = View.Details;
             LV_SERVER.Columns.Add("시간", 100, HorizontalAlignment.Left);
             LV_SERVER.Columns.Add("데이터", 300, HorizontalAlignment.Left);
+
+            LV_MANAGE_CLIENT.View = View.Details;
+            LV_MANAGE_CLIENT.Columns.Add("클라이언트", 200, HorizontalAlignment.Left);
+            LV_MANAGE_CLIENT.FullRowSelect = true;
         }
 
         private async void StartServer()
@@ -39,7 +43,7 @@ namespace EchoServer
                 server = new TcpListener(IPAddress.Any, Port);
                 server.Start();
 
-                while (isRunning || !cts.Token.IsCancellationRequested)
+                while (isRunning && !cts.Token.IsCancellationRequested)
                 {
                     TcpClient client = await server.AcceptTcpClientAsync();
                     string clientKey = ((IPEndPoint)client.Client.RemoteEndPoint).ToString();
@@ -48,6 +52,7 @@ namespace EchoServer
 
                     Invoke(new Action(() =>
                     {
+                        LV_MANAGE_CLIENT.Items.Add(new ListViewItem(clientKey));
                         AddListViewItem(DateTime.Now.ToString("HH:mm:ss"), $"연결 됐수다: {clientKey}");
                     }));
 
@@ -66,6 +71,35 @@ namespace EchoServer
             }
         }
 
+        private void StopServer()
+        {
+            try
+            {
+                server?.Stop();
+
+                foreach (var clientsList in manageClients)
+                {
+                    clientsList.Value?.Close();
+                }
+
+                cts?.Cancel();
+
+                AddListViewItem(DateTime.Now.ToString("HH:mm:ss"), "서버 ㄴㄴ");
+            }
+
+            catch (Exception ex)
+            {
+                MessageBox.Show($"서버 종료 오류: {ex.Message}");
+            }
+        }
+
+        private void Socket_Close(TcpClient client)
+        {
+            client?.GetStream().Close();
+            client?.Close();
+            client = null;
+        }
+
         private void ReceiveLoop(TcpClient client, string clientKey)
         {
             try
@@ -73,7 +107,6 @@ namespace EchoServer
                 NetworkStream stream = client.GetStream();
                 byte[] buffer = new byte[1024];
 
-                // Running flag, client 연결 확인 하고 ㄱㄱ
                 while (isRunning)
                 {
                     int bytesRead = 0;
@@ -101,6 +134,14 @@ namespace EchoServer
 
                 Invoke(new Action(() =>
                 {
+                    foreach (ListViewItem item in LV_MANAGE_CLIENT.Items)
+                    {
+                        if (item.Text == clientKey)
+                        {
+                            LV_MANAGE_CLIENT.Items.Remove(item);
+                            break;
+                        }
+                    }
                     AddListViewItem(DateTime.Now.ToString("HH:mm:ss"), "클라이언트 ㅂㅂ");
                 }));
 
@@ -117,6 +158,13 @@ namespace EchoServer
             {
                 Socket_Close(client);
             }
+        }        
+
+        private void setButtonStates(bool isOpened)
+        {
+            BTN_OPEN.Enabled = !isOpened;
+            BTN_STOP.Enabled = isOpened;
+            BTN_SEND.Enabled = isOpened;
         }
 
         private void AddListViewItem(string time, string data)
@@ -130,7 +178,8 @@ namespace EchoServer
         {            
             if (!isRunning)
             {
-                Btn_Status_Open();
+                isRunning = true;   
+                setButtonStates(true);
 
                 listenerThread = new Thread(new ThreadStart(StartServer));
                 listenerThread.IsBackground = true;
@@ -141,35 +190,51 @@ namespace EchoServer
 
         private void BTN_STOP_Click(object sender, EventArgs e)
         {
-            Btn_Status_Close();
-            server?.Stop();
+            setButtonStates(false);
+            StopServer();
         }
 
         private void BTN_EXIT_Click(object sender, EventArgs e)
         {
-            Socket_Close();
+            StopServer();
             Application.Exit();
         }
-
-        private void Btn_Status_Open()
+       
+        private void BTN_SEND_Click(object sender, EventArgs e)
         {
-            BTN_OPEN.Enabled = false;
-            BTN_STOP.Enabled = true;
-            isRunning = true;
-        }
+            if (LV_MANAGE_CLIENT.SelectedItems.Count == 0)
+            {
+                MessageBox.Show("클라이언트를 선택하세요.");
+                return;
+            }
 
-        private void Btn_Status_Close()
-        {
-            BTN_OPEN.Enabled = true;
-            BTN_STOP.Enabled = false;
-            isRunning = false;
-        }
+            string selectedClientKey = LV_MANAGE_CLIENT.SelectedItems[0].Text;
+            string message = TB_SEND.Text.Trim();
 
-        private void Socket_Close(TcpClient client)
-        {
-            client?.GetStream().Close();
-            client?.Close();
-            client = null;
+            if (string.IsNullOrEmpty(message))
+            {
+                MessageBox.Show("보낼 메시지를 입력하세요.");
+                return;
+            }
+
+            if (manageClients.TryGetValue(selectedClientKey, out TcpClient client))
+            {
+                try
+                {
+                    byte[] data = Encoding.UTF8.GetBytes(message);
+                    client.GetStream().Write(data, 0, data.Length);
+
+                    AddListViewItem(DateTime.Now.ToString("HH:mm:ss"), $"[Sent to {selectedClientKey}] {message}");
+                }
+                catch (Exception ex)
+                {
+                    AddListViewItem(DateTime.Now.ToString("HH:mm:ss"), $"[Send Error] {selectedClientKey}: {ex.Message}");
+                }
+            }
+            else
+            {
+                MessageBox.Show("해당 클라이언트가 연결되어 있지 않습니다.");
+            }
         }
     }
 }

@@ -89,3 +89,17 @@ $RECYCLE.BIN/
 
 # 기타 자동 생성 파일
 *.csproj.FileListAbsolute.txt
+
+# 임시 텍스트 에디터 백업
+*~ 
+*.tmp
+
+# JetBrains ReSharper
+_ReSharper*/
+*.DotSettings.user
+
+# Windows dump/logs
+*.dmp
+
+# Visual Studio Code 설정 외에 워크스페이스 설정
+*.code-workspace
