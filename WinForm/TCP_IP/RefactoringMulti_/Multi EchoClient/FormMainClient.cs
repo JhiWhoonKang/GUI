@@ -36,6 +36,7 @@ namespace EchoClient
             };
         }
 
+        #region manage Buttons
         //
         //  버튼 상태 관리
         //
@@ -45,9 +46,10 @@ namespace EchoClient
             BTN_DISCONNECT.Enabled = isConnected;
             BTN_SEND.Enabled = isConnected;
         }
-
+        
         //
-        //  전송
+        //  버튼 이벤트 처리
+        //  BTN_SEND_Click, BTN_CONNECT_Click, BTN_DISCONNECT_Click
         //
         private void BTN_SEND_Click(object sender, EventArgs e)
         {
@@ -79,5 +81,6 @@ namespace EchoClient
         {
             clientManager.disconnectClient();
         }
+        #endregion
     }
 }

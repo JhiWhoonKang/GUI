@@ -11,6 +11,7 @@ public class ClassClientManager
 
     private TcpClient tcpClient;
     private NetworkStream stream;
+    private CancellationTokenSource cts;
 
     private Thread recvThread;
     private Thread sendThread;
@@ -37,10 +38,13 @@ public class ClassClientManager
         tcpClient.Connect(ip, port);
         stream = tcpClient.GetStream();
 
+        cts = new CancellationTokenSource();
         isConnected = true;
 
-        startThread(ref recvThread, receiveLoop);
-        startThread(ref sendThread, sendLoop);
+        recvThread = new Thread(() => receiveLoop(cts.Token)) { IsBackground = true };
+        sendThread = new Thread(() => sendLoop(cts.Token)) { IsBackground = true };
+        recvThread.Start();
+        sendThread.Start();
 
         eventLog?.Invoke("연결 ㅇㅇ");
         eventConnected?.Invoke();
@@ -49,13 +53,16 @@ public class ClassClientManager
     public void disconnectClient()
     {
         isConnected = false;
-        sendQueue.CompleteAdding();
+        cts.Cancel();
 
         stopThread(recvThread);
         stopThread(sendThread);
 
         stream?.Close();
         tcpClient?.Close();
+
+        stream = null;
+        tcpClient = null;
 
         eventLog?.Invoke("연결 끄읕");
         eventDisconnected?.Invoke();
@@ -75,13 +82,13 @@ public class ClassClientManager
         }
     }
 
-    private void receiveLoop()
+    private void receiveLoop(CancellationToken cts)
     {
         try
         {
             byte[] buffer = new byte[1024];
 
-            while (isConnected)
+            while (isConnected && !cts.IsCancellationRequested)
             {
                 int bytesRead = stream.Read(buffer, 0, buffer.Length);
                 if (bytesRead == 0)
@@ -105,15 +112,15 @@ public class ClassClientManager
         }
     }
 
-    private void sendLoop()
+    private void sendLoop(CancellationToken cts)
     {
         try
         {
-            while (isConnected)
-            {
-                string message = sendQueue.Take();
+            while (isConnected && !cts.IsCancellationRequested)
+            {                
                 if (stream != null && stream.CanWrite)
                 {
+                    string message = sendQueue.Take();
                     byte[] data = Encoding.UTF8.GetBytes(message);
                     stream.Write(data, 0, data.Length);
                     eventLog?.Invoke($"[송신] {message}");
@@ -142,7 +149,12 @@ public class ClassClientManager
         thread.IsBackground = true;
         thread.Start();
     }
-
+    private void startThread(ref Thread thread, Action action)
+    {
+        thread = new Thread(() => action());
+        thread.IsBackground = true;
+        thread.Start();
+    }
     private void stopThread(Thread thread)
     {
         if (thread != null && thread.IsAlive)

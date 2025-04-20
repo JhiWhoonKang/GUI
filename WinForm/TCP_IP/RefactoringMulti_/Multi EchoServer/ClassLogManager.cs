@@ -14,6 +14,7 @@ public class ClassLogManager
     private void InitializeListView()
     {
         _listViewLog.View = View.Details;
+        _listViewLog.Columns.Clear();
         _listViewLog.Columns.Add("시간", 100, HorizontalAlignment.Left);
         _listViewLog.Columns.Add("데이터", 300, HorizontalAlignment.Left);
     }

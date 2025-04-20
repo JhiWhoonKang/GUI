@@ -5,6 +5,7 @@ using System.Threading;
 using System.Windows.Forms;
 using System.Text;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 
 public class ClassServerManager
 {
@@ -26,12 +27,14 @@ public class ClassServerManager
     public event Action eventDisconnected;
     #endregion
 
-    public ClassServerManager()
+    public ClassServerManager(ClassClientManager clientManager)
     {
-
+        this.clientManager = clientManager;
     }
 
-    public void startServer(int port)
+    #region manage Server State
+
+    public async Task startServer(int port)
     {
         if (isRunning)
         {
@@ -41,32 +44,30 @@ public class ClassServerManager
         serverPort = port;
         isRunning = true;
 
-        startThread(ref serverListenerThread, new ThreadStart(runServer));
+        serverListenerThread = new Thread(() => runServer()) { IsBackground = true };
+        serverListenerThread.Start();
 
         eventConnected?.Invoke();        
         eventLog?.Invoke($"서버 시작됨 (포트: {port})");
-
     }
 
-    private void runServer()
+    private async Task runServer()
     {
         try
         {
-            TcpListener server = new TcpListener(IPAddress.Any, serverPort);
+            server = new TcpListener(IPAddress.Any, serverPort);
             server.Start();
             eventLog?.Invoke("클라이언트 다 드르와;");
 
             while (isRunning)
             {
-                TcpClient client = server.AcceptTcpClient();
+                TcpClient client = await server.AcceptTcpClientAsync();
                 string clientKey = ((IPEndPoint)client.Client.RemoteEndPoint).ToString();
 
                 manageClients[clientKey] = client;
-                clientManager.addClient(clientKey);                
+                clientManager.addClient(clientKey);
 
-                Thread clientThread = new Thread(() => receiveLoop(client, clientKey));
-                clientThread.IsBackground = true;
-                clientThread.Start();
+                Task.Run(() => receiveLoop(client, clientKey));
 
                 eventLog?.Invoke($"연결 됐수다: {clientKey}");
                 eventConnected?.Invoke();
@@ -77,7 +78,7 @@ public class ClassServerManager
         {
             eventLog?.Invoke($"서버 ㅂㅂ, {ex.Message}");
         }
-    }
+    }    
 
     public void stopServer()
     {
@@ -99,58 +100,51 @@ public class ClassServerManager
             eventLog?.Invoke($"[stopServer catch문] {ex.Message}");
         }
     }
+    #endregion
 
-    private void receiveLoop(TcpClient client, string clientKey)
+    #region Send/Receive Loop
+    private async Task receiveLoop(TcpClient client, string clientKey)
     {
         try
         {
-            NetworkStream stream = client.GetStream();
-            byte[] buffer = new byte[1024];
+            var stream = client.GetStream();
+            var buffer = new byte[1024];
 
             while (isRunning)
             {
-                int bytesRead = 0;
-                try
-                {
-                    bytesRead = stream.Read(buffer, 0, buffer.Length);
-                }
-                catch
-                {
-                    break;
-                }
-
+                int bytesRead = await stream.ReadAsync(buffer, 0, buffer.Length);
                 if (bytesRead == 0)
                 {
                     break;
                 }
 
                 string receivedData = Encoding.UTF8.GetString(buffer, 0, bytesRead);
-                eventLog?.Invoke(receivedData);
+                eventLog.Invoke($"[수신] {clientKey} -> {receivedData}");
             }
-
-            eventLog?.Invoke("클라이언트 ㅂㅂ");
-            clientManager.removeClient(clientKey);
         }
         catch (Exception ex)
         {
             eventLog?.Invoke($"클라이언트 에러 ;;, {ex.Message}");
         }
-
         finally
         {
+            eventLog?.Invoke("클라이언트 ㅂㅂ");
+            clientManager.removeClient(clientKey);
+            manageClients.Remove(clientKey);
             closeSocket(client);
+            eventDisconnected?.Invoke();
         }
     }
 
-    public void sendLoop(string clientKey, string message)
+    public async Task sendLoop(string clientKey, string message)
     {
         if (manageClients.TryGetValue(clientKey, out TcpClient client))
         {
             try
             {
                 byte[] data = Encoding.UTF8.GetBytes(message);
-                client.GetStream().Write(data, 0, data.Length);
-                eventLog?.Invoke($"Sent to {clientKey} -> {message}");
+                await client.GetStream().WriteAsync(data, 0, data.Length);
+                eventLog?.Invoke($"[송신] {message} ->  {clientKey}");
             }
 
             catch (Exception ex)
@@ -163,13 +157,29 @@ public class ClassServerManager
             eventLog?.Invoke("해당 클라이언트가 연결ㄴㄴ임");
         }
     }
-
+    #endregion
 
     private void closeSocket(TcpClient client)
     {
-        client?.GetStream().Close();
-        client?.Close();
-        client = null;
+        if (client == null) return;
+
+        try
+        {
+            client.Client.Shutdown(SocketShutdown.Both);
+        }
+        catch { }
+
+        try
+        {
+            client.GetStream().Close();
+        }
+        catch { }
+
+        try
+        {
+            client.Close();
+        }
+        catch { }
     }
 
     #region manageThread

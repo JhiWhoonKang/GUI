@@ -1,23 +1,17 @@
 ﻿using System;
-using System.Net;
-using System.Net.Sockets;
-using System.Text;
 using System.Threading;
 using System.Windows.Forms;
-using System.Drawing;
-using System.Collections.Generic;
-using System.Diagnostics;
 
 namespace EchoServer
 {
     public partial class FormMainServer : Form
     {
-        private Thread listenerThread;
-
+        #region PV(class)
         private ClassDefine define;
         private ClassLogManager logManager;
         private ClassServerManager serverManager;
         private ClassClientManager clientManager;
+        #endregion
 
         public FormMainServer()
         {
@@ -26,9 +20,11 @@ namespace EchoServer
 
         private void FormMainServer_Load(object sender, EventArgs e)
         {
+            define = new ClassDefine();
             logManager = new ClassLogManager(LV_SERVER);
-            serverManager = new ClassServerManager();
             clientManager = new ClassClientManager(LV_MANAGE_CLIENT);
+            serverManager = new ClassServerManager(clientManager);
+            
 
             serverManager.eventLog += (log) =>
             {
@@ -46,6 +42,11 @@ namespace EchoServer
             };
         }
 
+        #region Button Work
+        //
+        //  버튼 상태 관리
+        //  setButtonStates
+        //
         private void setButtonStates(bool isOpened)
         {
             BTN_OPEN.Enabled = !isOpened;
@@ -53,6 +54,10 @@ namespace EchoServer
             BTN_SEND.Enabled = isOpened;
         }
 
+        //
+        //  버튼 이벤트 처리
+        //  BTN_OPEN_Click, BTN_STOP_Click, BTN_SEND_Click
+        //
         private void BTN_OPEN_Click(object sender, EventArgs e)
         {            
             if (!serverManager.isRunning)
@@ -66,7 +71,7 @@ namespace EchoServer
             serverManager.stopServer();
         }
         
-        private void BTN_SEND_Click(object sender, EventArgs e)
+        private async void BTN_SEND_Click(object sender, EventArgs e)
         {
             try
             {
@@ -91,13 +96,14 @@ namespace EchoServer
                 //
                 //  전송
                 //
-                serverManager.sendLoop(selectedClientKey, message);
+                await serverManager.sendLoop(selectedClientKey, message);
                 TB_SEND.Clear();
             }
             catch (Exception ex)
             {
                 logManager.addLog($"[BTN_SEND_Click catch문] {ex.Message}");
             }
-        }        
+        }
+        #endregion
     }
 }

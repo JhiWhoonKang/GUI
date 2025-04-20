@@ -19,6 +19,26 @@ public class ClassClientManager
         _listView.FullRowSelect = true;
     }
 
+    public string getSelectedClientKey()
+    {
+        if (_listView.InvokeRequired)
+        {
+            return (string)_listView.Invoke(new Func<string>(getSelectedClientKey));
+        }
+        else
+        {
+            if (_listView.SelectedItems.Count > 0)
+            {
+                return _listView.SelectedItems[0].Text;
+            }
+            else
+            {
+                return null;
+            }
+        }
+    }
+
+    #region manage Client State
     public void addClient(string clientKey)
     {
         if (_listView.InvokeRequired)
@@ -69,24 +89,5 @@ public class ClassClientManager
             _listView.Items.Clear();
         }
     }
-
-    public string getSelectedClientKey()
-    {
-        if (_listView.InvokeRequired)
-        {
-            return (string)_listView.Invoke(new Func<string>(getSelectedClientKey));
-        }
-        else
-        {
-            if (_listView.SelectedItems.Count > 0)
-            {
-                return _listView.SelectedItems[0].Text;
-            }
-            else
-            {
-                return null;
-            }
-        }
-    }
-
+    #endregion    
 }
