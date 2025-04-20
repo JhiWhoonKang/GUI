@@ -47,8 +47,9 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ClassClientManager.cs" />
+    <Compile Include="ClassDefine.cs" />
     <Compile Include="ClassLogManager.cs" />
-    <Compile Include="ClassServerManger.cs" />
+    <Compile Include="ClassServerManager.cs" />
     <Compile Include="FormMainServer.cs">
       <SubType>Form</SubType>
     </Compile>

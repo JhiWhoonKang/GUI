@@ -18,11 +18,11 @@ public class ClassLogManager
         _listViewLog.Columns.Add("데이터", 300, HorizontalAlignment.Left);
     }
 
-    public void AddLog(string message)
+    public void addLog(string message)
     {
         if (_listViewLog.InvokeRequired)
         {
-            _listViewLog.Invoke(new Action<string>(AddLog), message);
+            _listViewLog.Invoke(new Action<string>(addLog), message);
         }
         else
         {

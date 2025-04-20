@@ -8,15 +8,21 @@ public class ClassLogManager
     public ClassLogManager(ListView listViewLog)
     {
         _listViewLog = listViewLog;
-        InitializeListView();
+        initializeListView();
     }
-    private void InitializeListView()
+
+    private void initializeListView()
     {
         _listViewLog.View = View.Details;
         _listViewLog.Columns.Add("시간", 100, HorizontalAlignment.Left);
         _listViewLog.Columns.Add("보낸 데이터", 200, HorizontalAlignment.Left);
     }
 
+    //
+    //  listview 데이터 추가 관련
+    //  addLog, addLogLogic
+    //
+    #region log logic
     public void addLog(string sent)
     {
         string time = DateTime.Now.ToString("HH:mm:ss");
@@ -41,4 +47,5 @@ public class ClassLogManager
         _listViewLog.Items.Add(item);
         _listViewLog.EnsureVisible(_listViewLog.Items.Count - 1);
     }
+    #endregion
 }

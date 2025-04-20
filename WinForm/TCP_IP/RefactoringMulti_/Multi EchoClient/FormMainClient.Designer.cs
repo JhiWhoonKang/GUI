@@ -1,6 +1,6 @@
 ﻿namespace EchoClient
 {
-    partial class Form1
+    partial class FormMainClient
     {
         /// <summary>
         /// 필수 디자이너 변수입니다.
@@ -33,7 +33,6 @@
             this.BTN_SEND = new System.Windows.Forms.Button();
             this.BTN_CONNECT = new System.Windows.Forms.Button();
             this.BTN_DISCONNECT = new System.Windows.Forms.Button();
-            this.BTN_EXIT = new System.Windows.Forms.Button();
             this.TB_PORT = new System.Windows.Forms.TextBox();
             this.LB_PORT = new System.Windows.Forms.Label();
             this.LB_IP = new System.Windows.Forms.Label();
@@ -86,16 +85,6 @@
             this.BTN_DISCONNECT.UseVisualStyleBackColor = true;
             this.BTN_DISCONNECT.Click += new System.EventHandler(this.BTN_DISCONNECT_Click);
             // 
-            // BTN_EXIT
-            // 
-            this.BTN_EXIT.Location = new System.Drawing.Point(550, 165);
-            this.BTN_EXIT.Name = "BTN_EXIT";
-            this.BTN_EXIT.Size = new System.Drawing.Size(90, 30);
-            this.BTN_EXIT.TabIndex = 5;
-            this.BTN_EXIT.Text = "Exit";
-            this.BTN_EXIT.UseVisualStyleBackColor = true;
-            this.BTN_EXIT.Click += new System.EventHandler(this.BTN_EXIT_Click);
-            // 
             // TB_PORT
             // 
             this.TB_PORT.Location = new System.Drawing.Point(550, 66);
@@ -139,7 +128,6 @@
             this.Controls.Add(this.TB_IP);
             this.Controls.Add(this.LB_PORT);
             this.Controls.Add(this.TB_PORT);
-            this.Controls.Add(this.BTN_EXIT);
             this.Controls.Add(this.BTN_DISCONNECT);
             this.Controls.Add(this.BTN_CONNECT);
             this.Controls.Add(this.BTN_SEND);
@@ -148,7 +136,7 @@
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.SizableToolWindow;
             this.Name = "Form1";
             this.Text = "EchoClient";
-            this.Load += new System.EventHandler(this.Form1_Load);
+            this.Load += new System.EventHandler(this.FormMainClient_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -161,7 +149,6 @@
         private System.Windows.Forms.Button BTN_SEND;
         private System.Windows.Forms.Button BTN_CONNECT;
         private System.Windows.Forms.Button BTN_DISCONNECT;
-        private System.Windows.Forms.Button BTN_EXIT;
         private System.Windows.Forms.TextBox TB_PORT;
         private System.Windows.Forms.Label LB_PORT;
         private System.Windows.Forms.Label LB_IP;

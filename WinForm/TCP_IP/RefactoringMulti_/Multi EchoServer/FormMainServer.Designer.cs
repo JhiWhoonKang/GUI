@@ -31,7 +31,6 @@
             this.LV_SERVER = new System.Windows.Forms.ListView();
             this.BTN_STOP = new System.Windows.Forms.Button();
             this.BTN_OPEN = new System.Windows.Forms.Button();
-            this.BTN_EXIT = new System.Windows.Forms.Button();
             this.TB_SEND = new System.Windows.Forms.TextBox();
             this.BTN_SEND = new System.Windows.Forms.Button();
             this.LV_MANAGE_CLIENT = new System.Windows.Forms.ListView();
@@ -66,16 +65,6 @@
             this.BTN_OPEN.Text = "Open";
             this.BTN_OPEN.UseVisualStyleBackColor = true;
             this.BTN_OPEN.Click += new System.EventHandler(this.BTN_OPEN_Click);
-            // 
-            // BTN_EXIT
-            // 
-            this.BTN_EXIT.Location = new System.Drawing.Point(412, 106);
-            this.BTN_EXIT.Name = "BTN_EXIT";
-            this.BTN_EXIT.Size = new System.Drawing.Size(115, 41);
-            this.BTN_EXIT.TabIndex = 3;
-            this.BTN_EXIT.Text = "Exit";
-            this.BTN_EXIT.UseVisualStyleBackColor = true;
-            this.BTN_EXIT.Click += new System.EventHandler(this.BTN_EXIT_Click);
             // 
             // TB_SEND
             // 
@@ -121,7 +110,6 @@
             this.Controls.Add(this.LV_MANAGE_CLIENT);
             this.Controls.Add(this.BTN_SEND);
             this.Controls.Add(this.TB_SEND);
-            this.Controls.Add(this.BTN_EXIT);
             this.Controls.Add(this.BTN_OPEN);
             this.Controls.Add(this.BTN_STOP);
             this.Controls.Add(this.LV_SERVER);
@@ -140,7 +128,6 @@
         private System.Windows.Forms.ListView LV_SERVER;
         private System.Windows.Forms.Button BTN_STOP;
         private System.Windows.Forms.Button BTN_OPEN;
-        private System.Windows.Forms.Button BTN_EXIT;
         private System.Windows.Forms.TextBox TB_SEND;
         private System.Windows.Forms.Button BTN_SEND;
         private System.Windows.Forms.ListView LV_MANAGE_CLIENT;

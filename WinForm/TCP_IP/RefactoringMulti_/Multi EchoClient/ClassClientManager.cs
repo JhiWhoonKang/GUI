@@ -1,49 +1,52 @@
 ﻿using System;
 using System.Collections.Concurrent;
-using System.Collections.Generic;
-using System.Linq;
 using System.Net.Sockets;
 using System.Text;
 using System.Threading;
-using System.Threading.Tasks;
-using System.Windows.Forms;
 
 public class ClassClientManager
 {
     #region PV
+    public bool isConnected = false;
+
     private TcpClient tcpClient;
     private NetworkStream stream;
+
     private Thread recvThread;
     private Thread sendThread;
+
     private BlockingCollection<string> sendQueue = new BlockingCollection<string>();
-    private bool isConnected = false;
+    #endregion 
 
-    public event Action<string> OnReceived;
-    public event Action<string> OnLog;
-    public event Action OnDisconnected;
-
-    private ClassLogManager logManager;
+    #region PE
+    public event Action<string> eventLog;
+    public event Action eventConnected;
+    public event Action eventDisconnected;
     #endregion
 
-    public ClassClientManager(ClassLogManager logManager)
-    {
-        this.logManager = logManager;
-    }
+    public ClassClientManager() { }
 
-    public void Connect(string ip, int port)
+    //
+    //  클라이언트 데이터 송수신 메소드
+    //  connectClient, disconnectClient
+    //
+    #region manage connection
+    public void connectClient(string ip, int port)
     {
         tcpClient = new TcpClient();
         tcpClient.Connect(ip, port);
         stream = tcpClient.GetStream();
+
         isConnected = true;
 
         startThread(ref recvThread, receiveLoop);
         startThread(ref sendThread, sendLoop);
 
-        OnLog?.Invoke("연결 성공!");
+        eventLog?.Invoke("연결 ㅇㅇ");
+        eventConnected?.Invoke();
     }
 
-    public void Disconnect()
+    public void disconnectClient()
     {
         isConnected = false;
         sendQueue.CompleteAdding();
@@ -54,19 +57,25 @@ public class ClassClientManager
         stream?.Close();
         tcpClient?.Close();
 
-        OnLog?.Invoke("연결 종료");
-        OnDisconnected?.Invoke();
+        eventLog?.Invoke("연결 끄읕");
+        eventDisconnected?.Invoke();
     }
-    
-    public void Send(string message)
+    #endregion
+
+    //
+    //  클라이언트 데이터 송수신 메소드
+    //  receiveLoop, sendLoop
+    //
+    #region data communication
+    public void sendData(string message)
     {
         if (isConnected)
         {
             sendQueue.Add(message);
-        }            
+        }
     }
 
-    private void receiveLoop() 
+    private void receiveLoop()
     {
         try
         {
@@ -76,22 +85,26 @@ public class ClassClientManager
             {
                 int bytesRead = stream.Read(buffer, 0, buffer.Length);
                 if (bytesRead == 0)
+                {
                     break;
+                }
 
                 string received = Encoding.UTF8.GetString(buffer, 0, bytesRead);
-
-                logManager.addLog($"[받음] {received}");
+                eventLog?.Invoke($"[수신] {received}");
             }
         }
+
         catch (Exception ex)
         {
-            logManager.addLog($"[수신오류] {ex.Message}");
+            eventLog?.Invoke($"[receiveLoop catch문] {ex.Message}");
         }
+
         finally
         {
-            Invoke(new Action(() => DisconnectClient()));
+            eventDisconnected?.Invoke();
         }
     }
+
     private void sendLoop()
     {
         try
@@ -103,21 +116,26 @@ public class ClassClientManager
                 {
                     byte[] data = Encoding.UTF8.GetBytes(message);
                     stream.Write(data, 0, data.Length);
-
-                    logManager.addLog(message);
+                    eventLog?.Invoke($"[송신] {message}");
                 }
             }
         }
         catch (InvalidOperationException)
         {
-            // sendQueue가 CompleteAdding()으로 닫혔을 경우 발생 (정상 종료)
+
         }
         catch (Exception ex)
         {
-            logManager.addLog($"[전송 오류] {ex.Message}");
+            eventLog?.Invoke($"[sendLoop catch문] {ex.Message}");
         }
     }
+    #endregion
 
+    //
+    //  스레드 관련
+    //  startThread, stopThread
+    //
+    #region manageThread
     private void startThread(ref Thread thread, ThreadStart targetMethod)
     {
         thread = new Thread(targetMethod);
@@ -133,4 +151,5 @@ public class ClassClientManager
             thread = null;
         }
     }
+    #endregion
 }
